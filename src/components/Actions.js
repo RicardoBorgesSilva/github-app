@@ -9,8 +9,8 @@ export default class Actions extends Component {
     render() {
         return (
             <div className='actions'>
-                <button>Ver repositórios</button>
-                <button>Ver favoritos</button>
+                <button onClick={this.props.getRepositories}>Ver repositórios</button>
+                <button onClick={this.props.getStarred}>Ver favoritos</button>
             </div>
         )
     }

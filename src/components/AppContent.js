@@ -15,10 +15,14 @@ export default class AppContent extends Component {
         return (
             <div className="app">
 
-                <Search/>
+                <Search handleSearch={this.props.handleSearch}/>
 
                 {!!this.props.userinfo && <UserInfo userinfo={this.props.userinfo}/>}
-                {!!this.props.userinfo && <Actions/>}
+                {!!this.props.userinfo &&
+                    <Actions
+                        getRepositories={this.props.getRepositories}
+                        getStarred={this.props.getStarred}
+                    />}
 
                 {!!this.props.repositories.length &&
                     <Repositories

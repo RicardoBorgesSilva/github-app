@@ -19,9 +19,9 @@ export default class UserInfo extends Component {
                 </h1>
 
                 <ul className='repos-info'>
-                    <li>Repositórios: 122</li>
-                    <li>Seguidores: 10</li>
-                    <li>Seguindo: 10</li>
+                    <li>Repositórios: {this.props.userinfo.repositories}</li>
+                    <li>Seguidores: {this.props.userinfo.followers}</li>
+                    <li>Seguindo: {this.props.userinfo.following}</li>
                 </ul>
             </div>
         )
@@ -29,6 +29,6 @@ export default class UserInfo extends Component {
 }
 
 UserInfo.propTypes = {
-    userinfo: PropTypes.isRequired,
+
 }
 
