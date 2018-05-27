@@ -3,10 +3,11 @@ import Search from "./Search";
 import UserInfo from "./UserInfo";
 import Repositories from "./Repositories";
 import Actions from "./Actions";
+import PropTypes from 'prop-types';
 
 export default class AppContent extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 
@@ -16,24 +17,31 @@ export default class AppContent extends Component {
 
                 <Search/>
 
-                <UserInfo/>
+                {!!this.props.userinfo && <UserInfo userinfo={this.props.userinfo}/>}
+                {!!this.props.userinfo && <Actions/>}
 
-                <Actions/>
+                {!!this.props.repositories.length &&
+                    <Repositories
+                        className={'repos'}
+                        title={'Repositórios'}
+                        repositories={this.props.repositories}
+                    />
+                }
 
-                <Repositories
-                    className={'repos'}
-                    title={'Repositórios'}
-                    repositories={[{name:'Repository A', link:'#'}]}
-                />
-
-                <Repositories
-                    className={'starred'}
-                    title={'Favoritos'}
-                    repositories={[{name:'Repository A', link:'#'}]}
-                />
+                {!!this.props.starred.length &&
+                    <Repositories
+                        className={'starred'}
+                        title={'Favoritos'}
+                        repositories={this.props.starred}
+                    />
+                }
 
             </div>
         )
     }
 }
 
+AppContent.propTypes = {
+    repositories: PropTypes.array,
+    starred: PropTypes.array
+}
