@@ -11,7 +11,12 @@ class App extends Component {
             userinfo: null,
             repositories: [],
             starred: [],
+            isFetching:false
         }
+    }
+
+    getGuthubApiUrl(){
+        return 'https://api.github.com'
     }
 
     handleSearch(e) {
@@ -20,7 +25,8 @@ class App extends Component {
         const value = e.target.value
 
         if (key === ENTER) {
-            ajax().get(`https://api.github.com/users/${value}`)
+            this.setState({isFetching:true})
+            ajax().get(`${this.getGuthubApiUrl()}/users/${value}`)
                 .then((result) => {
                     this.setState({
                         userinfo: {
@@ -30,14 +36,19 @@ class App extends Component {
                             repositories: result.public_repos,
                             followers: result.followers,
                             following: result.following,
-                        }
+                        },
+                        repositories:[],
+                        starred:[]
                     })
+                })
+                .always(()=>{
+                    this.setState({isFetching:false})
                 })
         }
     }
 
     getRepositories(e){
-        ajax().get(`https://api.github.com/users/ricardo93borges/repos`)
+        ajax().get(`${this.getGuthubApiUrl()}/users/${this.state.userinfo.login}/repos`)
             .then((result)=>{
                 this.setState({
                     repositories:result.map((r) => {
@@ -51,7 +62,7 @@ class App extends Component {
     }
 
     getStarred(e){
-        ajax().get(`https://api.github.com/users/ricardo93borges/starred`)
+        ajax().get(`${this.getGuthubApiUrl()}/users/${this.state.userinfo.login}/starred`)
             .then((result)=>{
                 this.setState({
                     starred:result.map((r) => {
@@ -70,6 +81,7 @@ class App extends Component {
                 userinfo={this.state.userinfo}
                 repositories={this.state.repositories}
                 starred={this.state.starred}
+                isFetching={this.state.isFetching}
                 handleSearch={(e) => this.handleSearch(e)}
                 getRepositories={(e) => this.getRepositories(e)}
                 getStarred={(e) => this.getStarred(e)}

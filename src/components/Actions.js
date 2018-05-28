@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Search from "./Search";
+import PropTypes from 'prop-types';
 
 export default class Actions extends Component {
 
@@ -16,3 +18,6 @@ export default class Actions extends Component {
     }
 }
 
+Search.propTypes = {
+
+}
