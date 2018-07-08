@@ -13,7 +13,7 @@
     "build": "react-scripts build",
     "test": "jest --coverage",
     "eject": "react-scripts eject",
-    "test:watch": "yarn test -- --watch",
+    "test:watch": "yarn test --watch",
     "lint": "standard --verbose | snazzy",
     "lint:fix": "standard --fix --verbose | snazzy",
     "lint:watch":"gulp"
@@ -24,5 +24,8 @@
     "gulp": "^3.9.1",
     "jest-cli": "^23.3.0",
     "snazzy": "^7.1.1"
+  },
+  "standard":{
+    "globals":["test","it","describe"]
   }
 }
