@@ -1,6 +1,6 @@
 'use strict'
 
-import {expect} from 'chat'
+import {expect} from 'chai'
 import pagination from './index'
 
 test('pagination should be a function', () => {
